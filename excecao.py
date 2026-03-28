@@ -1,0 +1,3 @@
+
+class EstoquePrecoInvalidoError(Exception):
+    pass

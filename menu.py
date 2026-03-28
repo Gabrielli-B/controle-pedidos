@@ -18,7 +18,7 @@ vsql2 = """CREATE TABLE IF NOT EXISTS tb_pedidos(
 
 manipulacaoBanco.query(vcon,vsql)
 manipulacaoBanco.query(vcon,vsql2)
-manipulacaoBanco.vcon.close()
+
 
 
 def menu():
@@ -31,6 +31,15 @@ def menu():
     print("7 - Relatórios")
     print("8 - Sair")
 
+def menuInserir():
+    nome=input("Informe o nome do produto: ")
+    preco=float(input("Informe o preço do produto: "))
+    estoque=int(input("Informe a quantidade de estoque: "))
+    produto = funcionalidades.cadastrarProduto(nome,preco,estoque)
+    vsql = "INSERT INTO tb_produtos(NOME_PRODUTO, PRECO_PRODUTO, ESTOQUE_PRODUTO) VALUES (?,?,?)"
+    dados=(produto.nome,produto.preco,produto.estoque)
+    manipulacaoBanco.query(vcon,vsql,dados)
+
 op=0
 
 while(op != 8):
@@ -38,8 +47,6 @@ while(op != 8):
     op=int(input("Escolha uma opção: "))
 
     if(op == 1):
-        nome=input("Informe o nome do produto: ")
-        preco=float(input("Informe o preço do produto: "))
-        estoque=int(input("Informe a quantidade de estoque: "))
-        produto = funcionalidades.cadastrarProduto(nome,preco,estoque)
-        
+       menuInserir()
+
+vcon.close()       

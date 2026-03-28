@@ -10,15 +10,16 @@ def ConexaoBanco():
         print(ex)
     return con
 
-def query(conexao,sql):
+def query(conexao,sql,dados=None):
     try:
         c = conexao.cursor()
-        c.execute(sql)
+        if dados is not None:
+            c.execute(sql,dados)
+        else:
+            c.execute(sql)  
         conexao.commit()
     except Error as ex:
         print(ex)
-    finally:
-        print("Operação realizada com sucesso")
 
 def consultar(conexao, sql):
     c = conexao.cursor()

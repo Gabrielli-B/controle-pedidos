@@ -20,7 +20,6 @@ manipulacaoBanco.query(vcon,vsql)
 manipulacaoBanco.query(vcon,vsql2)
 
 
-
 def menu():
     print("1 - Cadastrar Produto")
     print("2 - Listar Produtos")
@@ -40,6 +39,38 @@ def menuInserir():
     dados=(produto.nome,produto.preco,produto.estoque)
     manipulacaoBanco.query(vcon,vsql,dados)
 
+def menuListar():
+    vsql="SELECT * FROM tb_produtos"
+    res=manipulacaoBanco.consultar(vcon,vsql)
+    for r in res:
+        print("ID:{r[0]}")
+        print("Nome:{r[1]}")
+        print("Preço R$:{r[2]}")
+        print("Estoque:{r[3]}")
+        print("-" *30)
+
+
+def menuAtualizar():
+    vid=int(input("Digite o ID do registro a ser Atualizado:"))
+    r=manipulacaoBanco.consultar(vcon,"SELECT * FROM tb_produtos WHERE ID_PRODUTO="+vid)
+    rnome=r[0][1]
+    rpreco=r[0][2]
+    restoque=r[0][3]
+
+    vnome=input("Digite o nome do produto:")
+    vpreco=float(input("Informe o preço do produto:"))
+    vestoque=int(input("Informe o estoque:"))
+
+    if(len(vnome)==0):
+        vnome=rnome
+    if(len(vpreco)==0):
+        vpreco=rpreco
+    if(len(vestoque)==0):
+        vestoque=restoque
+
+    vsql="UPDATE tb_produtos SET NOME_PRODUTO='"+vnome+"', PRECO_PRODUTO'"+vpreco+"', ESTOQUE_PRODUTO'"+vestoque+"'"
+    manipulacaoBanco.query(vcon,vsql)
+
 op=0
 
 while(op != 8):
@@ -48,5 +79,9 @@ while(op != 8):
 
     if(op == 1):
        menuInserir()
+    elif(op==2):
+        menuListar()
+    elif(op==3):
+        menuAtualizar()
 
 vcon.close()       

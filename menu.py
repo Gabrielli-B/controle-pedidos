@@ -16,8 +16,24 @@ vsql2 = """CREATE TABLE IF NOT EXISTS tb_pedidos(
             VALORTOTAL_PEDIDO FLOAT
         );"""
 
+vsql3= """CREATE TABLE IF NOT EXISTS tb_itenspedido(
+            ID_ITEM INTEGER PRIMARY KEY AUTOINCREMENT,
+            ID_PRODUTO INTEGER,
+            ID_PEDIDO  INTEGER,
+            QTD_ITEMPEDIDO INTEGER,
+            SUBTOTAL_ITEMPEDIDO REAL,
+
+            FOREIGN KEY(ID_PRODUTO)
+                REFERENCES tb_produtos(ID_PRODUTO)
+
+            FOREIGN KEY(ID_PEDIDO)
+                REFERENCES tb_pedidos(ID_PEDIDO)
+            
+        );"""
+
 manipulacaoBanco.query(vcon,vsql)
 manipulacaoBanco.query(vcon,vsql2)
+manipulacaoBanco.query(vcon,vsql3)
 
 
 def menu():
@@ -91,6 +107,9 @@ def menuRemover():
     manipulacaoBanco.query(vcon,vsql,(vid,))
     print("Produto removido!")
 
+#def menuNovoPedido():
+
+
 op=0
 
 while(op != 8):
@@ -105,5 +124,7 @@ while(op != 8):
         menuAtualizar()
     elif(op==4):
         menuRemover()
+#    elif(op==5):
+ #       menuNovoPedido()
 
-vcon.close()       
+vcon.close()

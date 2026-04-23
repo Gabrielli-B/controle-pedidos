@@ -1,6 +1,6 @@
 import funcionalidades
 import manipulacaoBanco
-
+from itensPedido import ItensPedido
 vcon=manipulacaoBanco.ConexaoBanco()
 
 vsql = """CREATE TABLE IF NOT EXISTS tb_produtos(
@@ -43,8 +43,7 @@ def menu():
     print("4 - Remover  Produto")
     print("5 - Novo Pedido")
     print("6 - Ver Pedidos")
-    print("7 - Relatórios")
-    print("8 - Sair")
+    print("7 - Sair")
 
 def menuInserir():
     nome=input("Informe o nome do produto: ")
@@ -107,12 +106,48 @@ def menuRemover():
     manipulacaoBanco.query(vcon,vsql,(vid,))
     print("Produto removido!")
 
-#def menuNovoPedido():
+def menuNovoPedido():
+    lista_itens = []
 
+    while True :
+        op=int(input(" 1 - Adicionar item ao pedido\n  2 - sair\nEscolha: "))
 
+        if op == 2:
+            break
+
+        try:
+            idProduto = int(input("Informe o ID do produto: "))
+            produto = funcionalidades.consultarRegistroExiste(vcon,idProduto)
+            qtd = int(input("Informe a quantidade: "))
+
+            preco = produto[2]
+            estoque = produto[3]
+
+            if qtd > estoque:
+                print("Estoque insuficiente!")
+                continue
+            item = ItensPedido(idProduto,preco,qtd)
+            lista_itens.append(item)
+            print("Item adicionado!")
+        except Exception as e:
+            print(e)
+
+    if len(lista_itens) == 0 :
+        print("Pedido Vazio!")
+        return
+    funcionalidades.salvarPedido(vcon,lista_itens)
+
+def menuVerPedidos():
+    vsql="SELECT * FROM tb_pedidos"
+    res=manipulacaoBanco.consultar(vcon,vsql)
+    for r in res:
+        print(f"ID:{r[0]}")
+        print(f"Data Pedido:{r[1]}")
+        print(f"Valor total pedido:{r[2]}")
+        
 op=0
 
-while(op != 8):
+while(op != 7):
     menu()
     op=int(input("Escolha uma opção: "))
 
@@ -124,7 +159,9 @@ while(op != 8):
         menuAtualizar()
     elif(op==4):
         menuRemover()
-#    elif(op==5):
- #       menuNovoPedido()
+    elif(op==5):
+        menuNovoPedido()
+    elif(op==6):
+        menuVerPedidos()
 
 vcon.close()

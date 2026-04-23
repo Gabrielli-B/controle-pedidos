@@ -21,8 +21,10 @@ def query(conexao,sql,dados=None):
     except Error as ex:
         print(ex)
 
-def consultar(conexao, sql):
+def consultar(conexao, sql, dados=None):
     c = conexao.cursor()
-    c.execute(sql)
-    res=c.fetchall()
-    return res
+    if dados:
+        c.execute(sql, dados)
+    else:
+        c.execute(sql)
+    return c.fetchall()

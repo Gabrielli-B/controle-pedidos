@@ -8,3 +8,4 @@ class Pedidos:
     def adicionarItem(self,item):
         self.itens.append(item)
         self.valorTotal+=item.subtotal
+

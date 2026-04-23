@@ -1,10 +1,11 @@
 
 class ItensPedido:
-    def __init__(self, id_produto,id_pedido,qtd,subtotal,id_item=None):
+    def __init__(self, id_produto,preco,qtd):
         self.id_produto = id_produto
-        self.id_pedido = id_pedido
+        self.preco = preco
         self.qtd = qtd
-        self.subtotal = subtotal
-        self.id_item = id_item
+        self.subtotal = preco * qtd
+
+    
         
         

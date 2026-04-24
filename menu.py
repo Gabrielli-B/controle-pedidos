@@ -1,6 +1,6 @@
 from itensPedido import ItensPedido
 import manipulacaoMenu
-
+ 
 
 def menu():
     print("1 - Cadastrar Produto")
@@ -30,3 +30,5 @@ while(op != 7):
     elif(op==6):
         manipulacaoMenu.menuVerPedidos()
 
+print("Programa encerrado!")
+manipulacaoMenu.vcon.close()

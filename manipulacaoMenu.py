@@ -19,6 +19,7 @@ def menuInserir():
     vsql = "INSERT INTO tb_produtos(NOME_PRODUTO, PRECO_PRODUTO, ESTOQUE_PRODUTO) VALUES (?,?,?)"
     dados=(produto.nome,produto.preco,produto.estoque)
     manipulacaoBanco.query(vcon,vsql,dados)
+
 def menuListar():
     vsql="SELECT * FROM tb_produtos"
     res=manipulacaoBanco.consultar(vcon,vsql)
@@ -109,5 +110,4 @@ def menuVerPedidos():
         print(f"ID:{r[0]}")
         print(f"Data Pedido:{r[1]}")
         print(f"Valor total pedido:{r[2]}")
-
-vcon.close()
+        print("-" *30)

@@ -31,7 +31,7 @@ while(op != 8):
     elif(op==6):
         manipulacaoMenu.menuVerPedidos()
     elif(op==7):
-        manipulacaoMenu.menuRelaroios()
+        manipulacaoMenu.menuRelatorios()
 
 print("Programa encerrado!")
 manipulacaoMenu.vcon.close()

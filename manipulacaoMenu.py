@@ -112,7 +112,7 @@ def menuVerPedidos():
         print(f"Valor total pedido:{r[2]}")
         print("-" *30)
 
-def menuRelaroios():
+def menuRelatorios():
     vsql="SELECT * FROM tb_itenspedido"
     res=manipulacaoBanco.consultar(vcon,vsql)
     for r in res:

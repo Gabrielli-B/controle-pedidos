@@ -111,3 +111,14 @@ def menuVerPedidos():
         print(f"Data Pedido:{r[1]}")
         print(f"Valor total pedido:{r[2]}")
         print("-" *30)
+
+def menuRelaroios():
+    vsql="SELECT * FROM tb_itenspedido"
+    res=manipulacaoBanco.consultar(vcon,vsql)
+    for r in res:
+        print(f"ID item:{r[0]}")
+        print(f"ID Produto:{r[1]}")
+        print(f"ID Pedido:{r[2]}")
+        print(f"Quantidade item pedido: {r[3]}")
+        print(f"Subtotal item pedido: {r[4]}")
+        print("-" *30)

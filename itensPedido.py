@@ -6,6 +6,5 @@ class ItensPedido:
         self.qtd = qtd
         self.subtotal = preco * qtd
 
-    
         
         

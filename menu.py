@@ -9,11 +9,12 @@ def menu():
     print("4 - Remover  Produto")
     print("5 - Novo Pedido")
     print("6 - Ver Pedidos")
-    print("7 - Sair")
+    print("7 - Relatorio Pedidos")
+    print("8 - Sair")
 
 op=0
 
-while(op != 7):
+while(op != 8):
     menu()
     op=int(input("Escolha uma opção: "))
 
@@ -29,6 +30,8 @@ while(op != 7):
         manipulacaoMenu.menuNovoPedido()
     elif(op==6):
         manipulacaoMenu.menuVerPedidos()
+    elif(op==7):
+        manipulacaoMenu.menuRelaroios()
 
 print("Programa encerrado!")
 manipulacaoMenu.vcon.close()
